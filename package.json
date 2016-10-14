@@ -1,0 +1,29 @@
+{
+  "name": "kcom",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-cookies": "^1.5.8",
+    "angular-password": "^1.0.3",
+    "angular-route": "^1.5.8",
+    "bcryptjs": "^2.3.0",
+    "body-parser": "^1.15.2",
+    "bootstrap": "^3.3.7",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "express-jwt": "^5.1.0",
+    "express-session": "^1.14.1",
+    "jsonwebtoken": "^7.1.9",
+    "mongoose": "^4.6.2",
+    "mongoose-unique-validator": "^1.0.2"
+  }
+}
