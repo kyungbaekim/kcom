@@ -1,25 +1,26 @@
 var mongoose = require('mongoose');
 
 var BusinessSchema = new mongoose.Schema({
-	kor_name: 	{ 
-		type: String, 
-		required: true 
+	kor_name: 	{
+		type: String,
+		required: true
 	},
-	eng_name: 	{ 
-		type: String, 
-		required: true 
+	eng_name: 	{
+		type: String,
+		required: true
 	},
-	phone: 		{ 
-		type: Number, 
+	phone: 		{
+		type: Number,
 		required: true,
 		validate: {
 			validator: function(phone) {
-				return phone && phone>=1000000000 && phone<=9999999999;
+				return /\d{10}/.test(phone);
+				// return phone && phone>=1000000000 && phone<=9999999999;
 			},
-			message: "Phone number must be exactly 10 numbers."
+			message: "Phone number must be exactly 10 digit numbers."
 		}
 	},
-	email: 		{ 
+	email: 		{
 		type: String,
 		validate: {
 			validator: function(value) {
@@ -28,16 +29,16 @@ var BusinessSchema = new mongoose.Schema({
 			message: "Email failed validation. Improper format."
 		}
 	},
-	street: 	{ 
-		type: String, 
+	street: 	{
+		type: String,
 		required: true
 	},
-	city: 		{ 
-		type: String, 
-		required: true 
+	city: 		{
+		type: String,
+		required: true
 	},
-	state: 		{ 
-		type: String, 
+	state: 		{
+		type: String,
 		required: true,
 		validate: {
 			validator: function(state) {
@@ -46,29 +47,35 @@ var BusinessSchema = new mongoose.Schema({
 			message: "State must be exactly 2 characters."
 		}
 	},
-	zip: 		{ 
-		type: Number, 
+	zip: 		{
+		type: Number,
 		required: true,
 		validate: {
 			validator: function(zip) {
 				return zip && zip >= 10000 && zip <= 99999;
 			},
-			message: "Zip code must be exactly 5 numbers."
+			message: "Zip code must be exactly 5 digit numbers."
 		}
 	},
-	lattitude: 	{ 
-		type: Number, 
-		required: true 
+	lattitude: 	{
+		type: Number,
+		required: true
 	},
-	longitude: 	{ 
-		type: Number, 
-		required: true 
+	longitude: 	{
+		type: Number,
+		required: true
 	},
-	website: 	{ 
-		type: String 
+	website: 	{
+		type: String,
+		validate: {
+			validator: function(website) {
+				return /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/.test(website);
+			},
+			message: "Entered website url failed validation. Improper format."
+		}
 	},
 	_categories:[{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }]
-}, 
+},
 {
 	timestamps: true
 });

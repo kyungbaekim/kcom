@@ -1,7 +1,6 @@
 <div class="row">
-
 	<!-- Add Category here -->
-	<div class="col-xs-10 col-xs-offset-1 panel-group">	
+	<div class="col-xs-10 col-xs-offset-1 panel-group">
 		<div class="panel panel-success">
 			<div class="panel-heading">Add a category (admin only)</div>
 			<div class="panel-body">
@@ -9,13 +8,7 @@
 					<!-- Korean Category Name -->
 					<div class="row">
 						<div class="form-group col-xs-6">
-							<input 	type="text"
-									class="form-control"
-									placeholder="한글" 
-									name="kor_cat" 
-									ng-model="newCategory.korean" 
-									required 
-									ng-pattern="/[\u3131-\uD79D]+/">
+							<input 	type="text"	class="form-control" placeholder="한글"	name="kor_cat"	ng-model="newCategory.korean"	required ng-pattern="/[\u3131-\uD79D]+/">
 						</div>
 						<div ng-if="addCategoryForm.kor_cat.$touched" class="col-xs-6">
 							<span class="error" ng-if="addCategoryForm.kor_cat.$error.required">한글 is required!</span>
@@ -25,12 +18,7 @@
 					<!-- English Category Name -->
 					<div class="row">
 						<div class="form-group col-xs-6">
-							<input 	type="text"
-									class="form-control"
-									placeholder="English"
-									name="eng_cat"
-									ng-model="newCategory.english" 
-									required>
+							<input 	type="text"	class="form-control" placeholder="English"	name="eng_cat"	ng-model="newCategory.english" required>
 						</div>
 						<div ng-if="addCategoryForm.eng_cat.$touched" class="col-xs-6">
 							<span class="error" ng-if="addCategoryForm.eng_cat.$error.required">English is required!</span>

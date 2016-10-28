@@ -10,13 +10,13 @@ app.config(function($routeProvider) {
 
     // businesses
     .when('/businesses/new', {
-      templateUrl: '/partials/business_new.html',
+      templateUrl: '/partials/business.html',
       controller: 'businessController'
     })
 
     // categories
     .when('/categories/new', {
-      templateUrl: '/partials/categories_new.html',
+      templateUrl: '/partials/categories.html',
       controller: 'categoryController'
     })
 

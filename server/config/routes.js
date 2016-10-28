@@ -1,15 +1,22 @@
-var businesses = require("../controllers/businesses.js"),
-	categories = require("../controllers/categories.js");
+var businesses = require("../controllers/businesses.js");
+var categories = require("../controllers/categories.js");
 
 module.exports = function(app) {
-
 	/* Businesses */
-	app.post('/businesses', businesses.create); // for creating a new business
-
+	// for creating a new business
+	app.post('/businesses', function(req, res){
+		businesses.create(req, res);
+	})
 
 	/* Categories */
-	app.get('/categories', categories.index); // returns list of categories in JSON
-	app.post('/categories', categories.create);	// for creating a new category
+	// returns list of categories in JSON
+	app.get('/categories', function(req, res){
+		categories.index(req, res);
+	})
+	// for creating a new category
+	app.post('/categories', function(req, res){
+		categories.create(req, res);
+	})
 
 	/* Users */
 

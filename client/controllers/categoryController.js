@@ -1,34 +1,18 @@
-app.controller('categoryController', 
-    ['$scope',
-    '$location',
-    '$routeParams',
-    '$cookies',
-    'categoryFactory',
-    function($scope, 
-            $location,
-            $routeParams,
-            $cookies,
-            categoryFactory) {
+app.controller('categoryController', function($scope, $location, $routeParams, $cookies, categoryFactory) {
+  // On load, bring all saved categories from DB
+  var index = function(){
+    categoryFactory.getCategories( function(categories) {
+      $scope.categories = categories;
+    });
+  }
 
+  index();
 
-    /* Private Variables */
-    // N/A
-
-    /* Private Methods */
-    // var index = function() {
-    	
-    // }
-
-    /* Public Variables */
-
-    /* Public Methods */
-    $scope.addCategory = function() {
-        categoryFactory.addCategory($scope.newCategory, function(category) {
-            $scope.addCategoryForm.$setUntouched();
-            $scope.newCategory = {};
-        });
-    }
-
-    /* On Load */
-    // index();
-}]); 
+  $scope.addCategory = function() {
+    categoryFactory.addCategory($scope.newCategory, function(category) {
+      $scope.addCategoryForm.$setUntouched();
+      $scope.newCategory = {};
+      index();
+    });
+  }
+});

@@ -1,38 +1,19 @@
-app.controller('businessController', 
-    ['$scope',
-    '$location',
-    '$routeParams',
-    '$cookies',
-    'businessFactory',
-    'categoryFactory',
-    function($scope, 
-            $location,
-            $routeParams,
-            $cookies,
-            businessFactory,
-            categoryFactory) {
+app.controller('businessController', function($scope, $location, $routeParams, $cookies, businessFactory, categoryFactory) {
+  // On load, bring all saved categories from DB
+  var index = function() {
+    categoryFactory.getCategories(function(categories) {
+      $scope.categories = categories;
+    });
+  }
 
+  index();
 
-    /* Private Variables */
-    // N/A
-
-    /* Private Methods */
-    var index = function() {
-    	categoryFactory.getCategories( function(categories) {
-            $scope.categories = categories;
-        });
-    }
-
-    /* Public Variables */
-
-    /* Public Methods */
-    $scope.addBusiness = function() {
-        businessFactory.addBusiness($scope.newBusiness, function(business) {
-            $scope.addBusinessForm.$setUntouched();
-            $scope.newBusiness = {};
-        });
-    }
-
-    /* On Load */
-    index();
-}]); 
+  // Add business to DB
+  $scope.addBusiness = function() {
+    businessFactory.addBusiness($scope.newBusiness, function(business) {
+      $scope.addBusinessForm.$setUntouched();
+      $scope.newBusiness = {};
+      index();
+    });
+  }
+});
