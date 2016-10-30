@@ -1,5 +1,5 @@
-var businesses = require("../controllers/businesses.js");
-var categories = require("../controllers/categories.js");
+// var businesses = require("../controllers/businesses.js");
+// var categories = require("../controllers/categories.js");
 
 module.exports = function(app) {
 	/* Businesses */

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="app">
-
 <head>
   <meta charset="UTF-8">
   <title>Korean Community</title>
@@ -13,6 +12,9 @@
   <script type="text/javascript" src='angular-cookies/angular-cookies.js'></script>
   <script type="text/javascript" src='angular-password/angular-password.js'></script>
 
+  <!-- GOOGLE MAPS -->
+  <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDGnq_fwNZCytzP1F5UVYVrMwNOFrZZjwk&libraries=geometry,places,visualization'></script>
+
   <!-- ANGULAR ROUTES-->
   <script type="text/javascript" src='app.js'></script>
 
@@ -22,6 +24,7 @@
   <!-- append more factories here -->
 
   <!-- CONTROLLERS -->
+  <script type="text/javascript" src='controllers/mapsController.js'></script>
   <script type="text/javascript" src='controllers/businessController.js'></script>
   <script type="text/javascript" src='controllers/categoryController.js'></script>
   <!-- append more controllers here -->
@@ -29,7 +32,7 @@
 
 <body>
   <div class="container">
-    <br><br><br>
+    <br>
     <div ng-view>
       <!-- partials go here -->
     </div>

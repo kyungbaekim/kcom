@@ -18,7 +18,7 @@
 					<div class="form-group">
 						<input name="eng_name" class="form-control" type="text" placeholder="English Name" ng-model="newBusiness.eng_name" required ng-minlength="4">
 						<div ng-if="addBusinessForm.eng_name.$touched">
-							<span class="error" ng-if="addBusinessForm.eng_name.$error.required">Korean Name is required!</span>
+							<span class="error" ng-if="addBusinessForm.eng_name.$error.required">English Name is required!</span>
 							<span class="error" ng-if="addBusinessForm.eng_name.$error.pattern">Invalid email format</span>
 							<span class="error" ng-if="addBusinessForm.eng_name.$error.minlength">Business name should be at least 4 letters long</span>
 						</div>
@@ -27,15 +27,15 @@
 					<div class="form-group">
 						<select name="category" class="form-control" ng-model=newBusiness.category>
 							<option selected disabled>Select a business category</option>
-      						<option ng-repeat="option in categories" ng-value="option._id" ng-bind="option.korean+' - '+option.english"></option>
-      					</select>
+  						<option ng-repeat="option in categories" ng-value="option._id" ng-bind="option.korean+' - '+option.english"></option>
+  					</select>
 						<div ng-if="addBusinessForm.category.$touched">
 							<span class="error" ng-if="addBusinessForm.category.$error.required">Business Category is required!</span>
 						</div>
 					</div>
 					<!-- Phone Number -->
 					<div class="form-group">
-						<input name="phone" class="form-control" type="number" placeholder="Phone Number" ng-model="newBusiness.phone" required ng-pattern="/^\d{10}$/">
+						<input name="phone" class="form-control" type="text" placeholder="Phone Number" ng-model="newBusiness.phone" required ng-pattern="/^\d{10}$/">
 						<div ng-if="addBusinessForm.phone.$touched">
 							<span class="error" ng-if="addBusinessForm.phone.$error.required">Phone required!</span>
 							<span class="error" ng-if="addBusinessForm.phone.$error.pattern">Invalid phone format (must be 10 digits including area code)</span>
@@ -72,7 +72,7 @@
 					</div>
 					<!-- Address: Zip -->
 					<div class="form-group">
-						<input name="zip" class="form-control" type="number" placeholder="Zip Code" ng-model="newBusiness.zip" required>
+						<input name="zip" class="form-control" type="text" placeholder="Zip Code" ng-model="newBusiness.zip" required>
 						<div ng-if="addBusinessForm.zip.$touched">
 							<span class="error" ng-if="addBusinessForm.zip.$error.required">Zip Code is required!</span>
 						</div>

@@ -1,5 +1,4 @@
 app.factory('businessFactory', function($http) {
-
   function SessionConstructor() {
     var _this = this;
     this.addBusiness = function(newBusiness, callback) {

@@ -5,7 +5,7 @@ app.config(function($routeProvider) {
     // index / landing page
     .when('/', {
       templateUrl: '/partials/dashboard.html',
-      controller: 'businessController'
+      controller: 'mapsController'
     })
 
     // businesses

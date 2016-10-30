@@ -14,9 +14,9 @@ app.use(cookieParser());
 app.use( express.static( path.join( root, 'client' )));
 app.use( express.static( path.join( root, 'node_modules' )));
 
-require('./server/config/mongoose.js');
+// require('./server/config/mongoose.js');
 require('./server/config/routes.js')(app); // set routes to 'app'
 
 app.listen( port, function() {
-	console.log("server running on port ${ port }");
+	console.log("server running on port " + port);
 });
