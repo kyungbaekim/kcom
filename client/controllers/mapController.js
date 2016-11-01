@@ -1,4 +1,4 @@
-app.controller('mapsController', function($scope) {
+app.controller('mapController', function($scope) {
   function initMap(){
     var map = new google.maps.Map(document.getElementById('display_map'), {
       center: {lat: 47.6053837, lng: -122.344292},

@@ -12,6 +12,9 @@
   <script type="text/javascript" src='angular-cookies/angular-cookies.js'></script>
   <script type="text/javascript" src='angular-password/angular-password.js'></script>
 
+  <!-- load fontawesom -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+
   <!-- GOOGLE MAPS -->
   <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDGnq_fwNZCytzP1F5UVYVrMwNOFrZZjwk&libraries=geometry,places,visualization'></script>
 
@@ -19,12 +22,14 @@
   <script type="text/javascript" src='app.js'></script>
 
   <!-- FACTORIES -->
+  <script type="text/javascript" src='factories/userFactory.js'></script>
   <script type="text/javascript" src='factories/businessFactory.js'></script>
   <script type="text/javascript" src='factories/categoryFactory.js'></script>
   <!-- append more factories here -->
 
   <!-- CONTROLLERS -->
-  <script type="text/javascript" src='controllers/mapsController.js'></script>
+  <script type="text/javascript" src='controllers/userController.js'></script>
+  <script type="text/javascript" src='controllers/mapController.js'></script>
   <script type="text/javascript" src='controllers/businessController.js'></script>
   <script type="text/javascript" src='controllers/categoryController.js'></script>
   <!-- append more controllers here -->
@@ -32,7 +37,12 @@
 
 <body>
   <div class="container">
-    <br>
+    <div class="jumbotron text-center">
+        <h1><span class="fa fa-lock"></span>kcomm Authentication</h1>
+        <p>Login or Register with:</p>
+        <a href="#/users/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
+        <a href="#/users/new" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
+    </div>
     <div ng-view>
       <!-- partials go here -->
     </div>
