@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute', 'ngCookies', 'ngPassword']);
+var app = angular.module('app', ['ngRoute', 'angularMoment', 'ngCookies', 'ngPassword', 'ui.bootstrap', 'ngIdle']);
 
 app.config(function($routeProvider) {
   $routeProvider
@@ -20,22 +20,16 @@ app.config(function($routeProvider) {
       controller: 'categoryController'
     })
 
-    // new user (register)
-    .when('/users/new', {
-      templateUrl: '/partials/register.html',
-      controller: 'userController'
-    })
-
-    // user login
-    .when('/users/login', {
-      templateUrl: '/partials/login.html',
-      controller: 'userController'
-    })
-
     // otherwise...
     .otherwise({
       redirectTo: '/'
     });
+});
+
+app.config(function(IdleProvider, KeepaliveProvider) {
+  IdleProvider.idle(60 * 15); // 15 minutes
+  IdleProvider.timeout(30); // 30 seconds
+  KeepaliveProvider.interval(30); // 30 seconds
 });
 
 // Custom validator based on expressions.

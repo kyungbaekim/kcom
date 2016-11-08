@@ -25,37 +25,25 @@ var bcrypt = require('bcryptjs');
 
 var UserSchema = new mongoose.Schema({
     local            : {
-			username     : { type: String, required: true, minlength: 4 },
-			first_name   : { type: String, required: true, minlength: 2 },
-			last_name    : { type: String, required: true, minlength: 2 },
-      email        : {
-											type: String,
-											required: true,
-											unique: true,
-											validate: {
-												validator: function(value) {
-													return /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(value);
-												},
-												message: "Email failed validation. Improper format."
-											}
-										},
+			username     : String,
+			first_name   : String,
+			last_name    : String,
+      email        : String,
       password     : String,
     },
     facebook         : {
       id           : String,
-      token        : String,
       email        : String,
-      name         : String
+      name         : String,
+      picture      : String
     },
     twitter          : {
       id           : String,
-      token        : String,
       displayName  : String,
       username     : String
     },
     google           : {
       id           : String,
-      token        : String,
       email        : String,
       name         : String
     },
@@ -64,24 +52,22 @@ var UserSchema = new mongoose.Schema({
 		timestamps: true
 });
 
-UserSchema.pre('save', function(next){
-	// only perform password encryption if the password is modified (user edit page maybe?) or new
-	if (!this.isModified('password')) return next();
+// UserSchema.pre('save', function (done){
+// 	var user = this;
+// 	if(user.local.password){
+// 		bcrypt.genSalt(10, function (err, salt){
+// 			bcrypt.hash(user.local.password, salt, function (err, hash){
+// 				user.local.password = hash
+// 				done()
+// 			});
+// 		});
+// 	}
+// });
 
-	// generate a salt
-  bcrypt.genSalt(10, function(err, salt) {
-    if (err) return next(err);
-
-    // hash the password using our new salt
-    bcrypt.hash(this.local.password, salt, function(err, hash) {
-      if (err) return next(err);
-
-      // override the cleartext password with the hashed one
-      this.local.password = hash;
-      next();
-    });
-  });
-});
+// generating a hash
+UserSchema.methods.generateHash = function(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+};
 
 UserSchema.methods.passwordCheck = function(loginPassword){
 	return bcrypt.compareSync(loginPassword, this.local.password);

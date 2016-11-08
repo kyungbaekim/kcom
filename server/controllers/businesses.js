@@ -14,6 +14,6 @@ module.exports = {
 			} else {
 				res.json(business);
 			}
-		});	
+		});
 	}
 }
