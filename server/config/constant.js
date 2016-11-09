@@ -1,0 +1,1 @@
+exports.jwtTokenSecret = 'ilovek-community!';

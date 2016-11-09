@@ -2,7 +2,7 @@ var businesses = require("../controllers/businesses.js");
 var categories = require("../controllers/categories.js");
 var users = require("../controllers/users.js");
 
-module.exports = function(app, passport) {
+module.exports = function(app) {
 	/* Businesses */
 	// for creating a new business
 	app.post('/businesses', function(req, res){
@@ -25,43 +25,43 @@ module.exports = function(app, passport) {
 		users.index(req, res);
 	})
 
-	app.get('/getUser', isLoggedIn, function (req, res){
+	app.get('/getUser', function (req, res){
+		users.getUser(req, res);
+	})
+
+	app.get('/getUser/:id', function (req, res){
+		users.getUser(req, res);
+	})
+
+	// get user from cookie data
+	app.get('/getCookieUser/:id', function (req, res){
 		users.getUser(req, res);
 	})
 
 	// process the signup form
-  app.post('/register', passport.authenticate('local-signup'), function(req, res) {
-		users.login(req, res);
+  app.post('/register', function(req, res) {
+		users.create(req, res);
   });
 
 	// process the login form
-	app.post('/login', passport.authenticate('local-login'), function(req, res) {
+	app.post('/login', function(req, res) {
 		users.login(req, res);
 	});
 
 	// facebook -------------------------------
-  // send to facebook to do the authentication
-  app.get('/auth/facebook', passport.authenticate('facebook'));
+  // process facebook login
+	app.post('/FBlogin', function(req, res){
+		users.FBlogin(req, res);
+	})
 
-  // handle the callback after facebook has authenticated the user
-  app.get('/auth/facebook/callback', passport.authenticate('facebook'), function(req, res) {
-		users.getUser(req, res);
-		// res.redirect('/getUser');
-  });
-
+	// get session data
 	app.get('/getSession', function(req, res){
-		if(req.session.passport && req.session.passport.user){
-			users.getUser(req, res);
-		}
-		res.json(req.session);
+		res.json(req.session)
 	})
 
 	// process logout
 	app.get('/logout', function(req, res) {
-    req.logout();
-		res.status(200).json({
-	    status: 'Bye!',
-	  });
+    users.logout(req, res)
 	})
 }
 

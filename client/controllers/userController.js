@@ -4,6 +4,17 @@ app.controller('userController', function ($scope, $rootScope, userFactory, $uib
   $('#email').focus();
   $('#username').focus();
 
+  if($cookies.get("_id") != undefined){
+    console.log($cookies.get("_id"));
+    userFactory.getCookieUser($cookies.get("_id"), function(data){
+      console.log("Current user data: ", data)
+      $rootScope.sessionUser = data;
+    })
+  }
+  else {
+    console.log("No user cookie data available.")
+  }
+
   userFactory.getSession(function(data){
     console.log("Current session data: ", data)
   })
@@ -12,9 +23,14 @@ app.controller('userController', function ($scope, $rootScope, userFactory, $uib
 		console.log("All users:", data);
 	})
 
-  $scope.fblogin = function(){
-    userFactory.fblogin(function(data){
+  $scope.FBlogin = function(){
+    userFactory.FBlogin(function(data){
       console.log(data)
+      userFactory.getUser(data.user, function(user){
+        console.log("Current user data: ", user)
+        $rootScope.sessionUser = user;
+        $cookies.put("_id", user._id);
+      })
     })
   }
 
@@ -35,6 +51,8 @@ app.controller('userController', function ($scope, $rootScope, userFactory, $uib
 			console.log(data)
 			$rootScope.sessionUser = data;
 			console.log('current sessionUser', $rootScope.sessionUser)
+      $cookies.put("_id", data._id);
+      console.log($cookies.get("_id"));
 			Idle.watch();
 			$scope.started = true;
     }, function () {
@@ -84,6 +102,8 @@ app.controller('userController', function ($scope, $rootScope, userFactory, $uib
 		modalInstance.result.then(function (data) {
 			$rootScope.sessionUser = data;
 			console.log('current sessionUser', $rootScope.sessionUser)
+			$cookies.put("_id", data._id);
+      console.log($cookies.get("_id"));
 			Idle.watch();
 			$scope.started = true;
 		}, function () {
@@ -115,8 +135,9 @@ app.controller('userController', function ($scope, $rootScope, userFactory, $uib
     // call logout from service
     console.log("Logging out!")
     userFactory.logout(function(data){
-      if(data.status == 'Bye!'){
+      if(data.status){
         $rootScope.sessionUser = null;
+        $cookies.remove("_id");
         Idle.unwatch();
         $scope.started = false;
       }

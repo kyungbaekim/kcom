@@ -53,7 +53,8 @@
       <a ng-click="login()" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
       <a ng-click="register()" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
       <!-- <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a> -->
-      <a ng-click="fblogin()" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
+      <a ng-click="FBlogin()" scope="public_profile, email" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
+      <!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button> -->
     </div>
     <div ng-if="sessionUser" class="jumbotron text-center">
       <div class="well">
@@ -63,7 +64,7 @@
           <strong>name</strong>: {{ sessionUser.local.username }}<br>
           <!-- <strong>password</strong>: {{ user.local.password }} -->
         </p>
-        <div ng-controller="userController">
+        <div>
           <a ng-click='logout()' class="btn btn-default">Logout</a>
         </div>
       </div>

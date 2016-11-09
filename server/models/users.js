@@ -17,32 +17,45 @@ var bcrypt = require('bcryptjs');
 // 	username: 	{ type: String, required: true, minlength: 4 },
 // 	first_name: { type: String, required: true, minlength: 2 },
 // 	last_name: 	{ type: String, required: true, minlength: 2 },
-// 	password: 	{ type:String, required: true, minlength: 8 }
+// 	password: 	{ type: String, required: true, minlength: 8 }
 // },
 // {
 // 	timestamps: true
 // });
 
 var UserSchema = new mongoose.Schema({
-    local            : {
-			username     : String,
-			first_name   : String,
-			last_name    : String,
-      email        : String,
-      password     : String,
+    provider       : String,
+    local          : {
+			username     : { type: String, minlength: 4 },
+			first_name   : { type: String, minlength: 2 },
+			last_name    : { type: String, minlength: 2 },
+      email        : {type: String,
+                      unique: true,
+                      validate: {
+                  			validator: function(value) {
+                  				return /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(value);
+                  			},
+                  			message: "Email failed validation. Improper format."
+                  		}
+                    },
+      password     : { type: String, minlength: 8 }
     },
-    facebook         : {
+    facebook       : {
       id           : String,
       email        : String,
-      name         : String,
-      picture      : String
+      first_name   : String,
+      last_name    : String,
+      username     : String,
+      gender       : String,
+      locale       : String,
+      link         : String
     },
-    twitter          : {
+    twitter        : {
       id           : String,
       displayName  : String,
       username     : String
     },
-    google           : {
+    google         : {
       id           : String,
       email        : String,
       name         : String
